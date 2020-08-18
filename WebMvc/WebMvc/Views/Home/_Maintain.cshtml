@@ -1,0 +1,60 @@
+<form ng-show="EditShow" id="form-edit" ng-submit="SaveData()">
+    <div class="page-title"><span ng-bind="IsCreate"></span></div>
+    <div class="t3g-content">
+        <div class="condition-search-content">
+            <div class="condition-search">
+                <div class="panel panel-default">
+                    <div class="row">
+                        <div class="col-xs-4 col-lg-2 text-right">
+                            <label for="CompanyId" class="control-label">KeyValueName:</label>
+                        </div>
+                        <div class="col-xs-8 col-lg-6 text-left">
+                            <input type="text" class="form-control" id="keyValueName" ng-model="data.KeyValueName">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4 col-lg-2 text-right">
+                            <label for="CompanyId" class="control-label">Text:</label>
+                        </div>
+                        <div class="col-xs-8 col-lg-6 text-left">
+                            <input type="text" class="form-control" id="text" ng-model="data.Text">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4 col-lg-2 text-right">
+                            <label for="CompanyId" class="control-label">Value:</label>
+                        </div>
+                        <div class="col-xs-8 col-lg-6 text-left">
+                            <input type="text" class="form-control" id="value" ng-model="data.Value">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4 col-lg-2 text-right">
+                            <label for="CompanyId" class="control-label">Sort:</label>
+                        </div>
+                        <div class="col-xs-8 col-lg-6 text-left">
+                            <input type="text" class="form-control" id="sort" ng-model="data.Sort">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4 col-lg-2 text-right">
+                            <label for="CompanyId" class="control-label">EnterPriseId:</label>
+                        </div>
+                        <div class="col-xs-8 col-lg-6 text-left">
+                            <input type="text" class="form-control" id="enterPriseId" ng-model="data.EnterPriseId">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4"><input type="submit" id="bSave" class="btn btn-success" value="Save" /></div>
+                        <div class="col-xs-4"><input type="button" id="bCancel" class="btn btn-default" value="Cancle" ng-click="ShowQuery()" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,6 +1,7 @@
 ﻿using DAL;
 using Newtonsoft.Json;
 using Service;
+using Shared.Core.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,25 +24,50 @@ namespace WebMvc.Controllers
 
             List<KeyValuesViewModel> data = new List<KeyValuesViewModel>();
 
-            try
+            data = service.ReadData(query);
+
+            var obj = new
             {
-                data = service.ReadData(query);
+                data = data,
+                total = data.Count
+            };
 
-                var obj = new
-                {
-                    data = data,
-                    total = data.Count
-                };
+            var result = JsonConvert.SerializeObject(obj, new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
+            return Content(result, "application/json");
+        }
 
-                var result = JsonConvert.SerializeObject(obj, new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
+        public ActionResult Edit(string keyValueName, string text)
+        {
+            HomeService service = new HomeService();
+
+            List<KeyValuesViewModel> data = new List<KeyValuesViewModel>();
+
+            KeyValuesViewModel query = new KeyValuesViewModel();
+
+            query.KeyValueName = keyValueName;
+            query.Text = text;
+
+            data = service.ReadData(query);
+
+            return Json(new ApplicationMessage { IsOk = true, Data = data.FirstOrDefault() });
+        }
+
+        public ActionResult Update(KeyValuesViewModel data)
+        {
+            HomeService service = new HomeService();
+
+            bool res = service.Update(data, out string errMsg);
+
+            if (res)
+            {
+                var result = JsonConvert.SerializeObject(new { IsOk = true, Message = "儲存成功" }, new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
                 return Content(result, "application/json");
             }
-            catch (Exception ex)
+            else
             {
-                string exMsg = ex.Message;
+                var result = JsonConvert.SerializeObject(new { IsOk = false, Message = "儲存失敗" + errMsg }, new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
+                return Content(result, "application/json");
             }
-
-            return Json(new { data = "", total = 0 });
         }
     }
 }

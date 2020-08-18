@@ -1023,6 +1023,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Home\_Maintain.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -1052,6 +1053,10 @@
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{12D8EE4C-C739-4B3D-8BA5-DB18B3BCC516}</Project>
       <Name>Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Core.Data\Shared.Core.Data.csproj">
+      <Project>{B6511DEC-EE95-4C61-8EA8-6D04D64BB473}</Project>
+      <Name>Shared.Core.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
       <Project>{E330928F-041C-4872-8C0C-0FCF1A815181}</Project>

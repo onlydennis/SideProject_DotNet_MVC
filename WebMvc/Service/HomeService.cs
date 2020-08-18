@@ -38,5 +38,33 @@ namespace Service
 
             return result;
         }
+
+        public bool Update(KeyValuesViewModel data, out string errMsg)
+        {
+            KeyValuesDAO keyValuesDAO = new KeyValuesDAO();
+
+            errMsg = "";
+
+            try
+            {
+                var dbModel = keyValuesDAO.FindById(data.Id);
+
+                dbModel.KeyValueName = data.KeyValueName;
+                dbModel.Text = data.Text;
+                dbModel.Value = data.Value;
+                dbModel.Sort = data.Sort;
+                dbModel.EnterPriseId = data.EnterPriseId;
+
+                keyValuesDAO.Update(dbModel);
+                keyValuesDAO.SaveChange();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+                return false;
+            }
+
+            return true;
+        }
     }
 }

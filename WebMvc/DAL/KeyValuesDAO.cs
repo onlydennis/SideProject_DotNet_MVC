@@ -46,5 +46,34 @@ namespace DAL
 
             return res;
         }
+
+        public KeyValues FindById(int id)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.Append("select                ");
+            stringBuilder.Append("	K.Id,               ");
+            stringBuilder.Append("	K.KeyValueName,     ");
+            stringBuilder.Append("	K.Text,             ");
+            stringBuilder.Append("	K.Value,            ");
+            stringBuilder.Append("	K.Sort,             ");
+            stringBuilder.Append("	K.EnterPriseId      ");
+            stringBuilder.Append("from                  ");
+            stringBuilder.Append("	KeyValues K         ");
+            stringBuilder.Append("where                 ");
+            stringBuilder.Append("	1 = 1               ");
+
+            Dapper.DynamicParameters parameterList = new DynamicParameters();
+
+            if (id > 0)
+            {
+                stringBuilder.AppendLine(@" and K.Id = @id ");
+                parameterList.Add("@id", id);
+            }
+
+            var res = _db.Database.Connection.Query<KeyValues>(stringBuilder.ToString(), parameterList).FirstOrDefault();
+
+            return res;
+        }
     }
 }

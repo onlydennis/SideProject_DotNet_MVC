@@ -7,7 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace CFData
+namespace Shared.Core.Data
 {
     public class DbContextBase : DbContext
     {

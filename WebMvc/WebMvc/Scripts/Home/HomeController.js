@@ -1,6 +1,12 @@
 ﻿app.controller('HomeController', HomeController);
 
 function HomeController($scope, $http, $filter) {
+    $scope.init = function () {
+        $scope.data = {
+
+        }
+    }
+
     $scope.QueryAll = function () {
         $('#gridRegion').data('kendoGrid').dataSource.transport.options.read.data.query = $scope.Query;
         $('#gridRegion').data("kendoGrid").dataSource.read();
@@ -64,7 +70,55 @@ function HomeController($scope, $http, $filter) {
 
     $scope.ShowQuery = function () {
         $scope.QueryShow = true;
+        $scope.EditShow = false;
     }
 
     $scope.ShowQuery();
+
+    $scope.ShowEdit = function () {
+        $scope.QueryShow = false;
+        $scope.EditShow = true;
+
+        $scope.init();
+    }
+
+    $scope.EditData = function (data) {
+        $http.post('/Home/Edit', { keyValueName: data.KeyValueName, text: data.Text })
+            .then(function (result) {
+                if (result.data.IsOk) {
+                    $scope.IsCreate = "修改";
+                    $scope.IsShowDelBtn = true;
+                    $scope.ShowEdit();
+                    $scope.data = result.data.Data;
+                }
+                else {
+                    $.unblockUI();
+                    alertify.alert(result.data.Message);
+                    $scope.IsShowDelBtn = false;
+                }
+            });
+    }
+
+    $scope.SaveData = function () {
+        if ($scope.data == null)
+            return false;
+
+        var url = '/Home/Update';
+
+        $http.post(url,
+            {
+                data: $scope.data
+            }).then(function (result) {
+                if (result.data.IsOk) {
+                    $scope.QueryAll();
+                    $scope.ShowQuery();
+                    alertify.success(result.data.Message);
+                }
+                else if (result.data.IsOk == false)
+                    alertify.alert(result.data.Message);
+                else {
+                    alertify.error(result.data.Message);
+                }
+            });
+    }
 }
