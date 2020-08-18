@@ -23,8 +23,20 @@ namespace WebMvc
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                "~/Content/site.css",
+                "~/Content/kendo/kendo.common.min.css",
+                "~/Content/kendo/kendo.default.min.css",
+                "~/Content/bootstrap.min.css",
+
+                "~/Content/alertify/alertify.core.css",
+                "~/Content/alertify/alertify.default.css",
+                //"~/Content/portal.css",
+                //"~/Content/validationEngine.jquery.css",
+                "~/Content/css.css",
+                "~/Content/style.css",
+                "~/Content/toastr.min.css",
+                "~/Content/animate.css"
+                ));
         }
     }
 }

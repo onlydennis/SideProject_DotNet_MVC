@@ -1,9 +1,12 @@
 ﻿using DAL;
+using Newtonsoft.Json;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ViewModel;
 
 namespace WebMvc.Controllers
 {
@@ -11,32 +14,34 @@ namespace WebMvc.Controllers
     {
         public ActionResult Index()
         {
-            KeyValuesDAO dao = new KeyValuesDAO();
+            return View();
+        }
+
+        public ActionResult ReadData(KeyValuesViewModel query)
+        {
+            HomeService service = new HomeService();
+
+            List<KeyValuesViewModel> data = new List<KeyValuesViewModel>();
 
             try
             {
-                var tmp = dao.Test();
+                data = service.ReadData(query);
+
+                var obj = new
+                {
+                    data = data,
+                    total = data.Count
+                };
+
+                var result = JsonConvert.SerializeObject(obj, new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
+                return Content(result, "application/json");
             }
             catch (Exception ex)
             {
-                string errMsg = ex.Message;
+                string exMsg = ex.Message;
             }
 
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return Json(new { data = "", total = 0 });
         }
     }
 }

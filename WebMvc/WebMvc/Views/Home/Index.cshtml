@@ -1,31 +1,55 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿<div class="t3g-content" id="Controller" ng-controller="HomeController">
+    <form id="QueryForm" class="query" data-nostar ng-show="QueryShow">
+        <div class="row content-row">
+            <div class="page-content">
+                <div class="condition-search-content">
+                    <div class="condition-search">
+                        <div class="col-sm-6 col-xs-6 text-right">
+                            <input type="button" class="btn btn-default" value="查詢" ng-click="QueryAll()" />
+                        </div>
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            進階查詢
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-xs-12">
+                                                <div class="condition-item item-clear">
+                                                    <span class="item-title">KeyValueName：</span>
+                                                    <div class="item-content">
+                                                        <input type="text" id="Reseller_No" class="form-control" ng-model="Query.KeyValueName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12">
+                                                <div class="condition-item item-clear">
+                                                    <span class="item-title">Text：</span>
+                                                    <div class="item-content">
+                                                        <input type="text" id="Reseller_Name" class="form-control" ng-model="Query.Text" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="gridRegion">
+        </div>
+    </form>
+</div>
+@section header
+{
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/Home/HomeController.js?20200818_01"></script>
 }
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
