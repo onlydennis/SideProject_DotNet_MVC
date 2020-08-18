@@ -69,5 +69,23 @@ namespace WebMvc.Controllers
                 return Content(result, "application/json");
             }
         }
+
+        public ActionResult Create(KeyValuesViewModel data)
+        {
+            HomeService service = new HomeService();
+
+            bool res = service.Create(data, out string errMsg);
+
+            if (res)
+            {
+                var result = JsonConvert.SerializeObject(new { IsOk = true, Message = "儲存成功" }, new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
+                return Content(result, "application/json");
+            }
+            else
+            {
+                var result = JsonConvert.SerializeObject(new { IsOk = false, Message = "儲存失敗" + errMsg }, new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
+                return Content(result, "application/json");
+            }
+        }
     }
 }

@@ -71,6 +71,8 @@ function HomeController($scope, $http, $filter) {
     $scope.ShowQuery = function () {
         $scope.QueryShow = true;
         $scope.EditShow = false;
+
+        $scope.IsShowDelBtn = false;
     }
 
     $scope.ShowQuery();
@@ -103,7 +105,12 @@ function HomeController($scope, $http, $filter) {
         if ($scope.data == null)
             return false;
 
-        var url = '/Home/Update';
+        var url = '/Home/';
+
+        if ($scope.IsCreate == "新增")
+            url += 'Create';
+        else
+            url += 'Update';
 
         $http.post(url,
             {
@@ -120,5 +127,11 @@ function HomeController($scope, $http, $filter) {
                     alertify.error(result.data.Message);
                 }
             });
+    }
+
+    $scope.Create = function () {
+        $scope.IsCreate = "新增";
+        $scope.ShowEdit();
+        $scope.IsShowDelBtn = false;
     }
 }

@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using CFData;
+using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,34 @@ namespace Service
                 dbModel.EnterPriseId = data.EnterPriseId;
 
                 keyValuesDAO.Update(dbModel);
+                keyValuesDAO.SaveChange();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool Create(KeyValuesViewModel data, out string errMsg)
+        {
+            KeyValuesDAO keyValuesDAO = new KeyValuesDAO();
+
+            errMsg = "";
+
+            try
+            {
+                KeyValues modelData = new KeyValues();
+
+                modelData.KeyValueName = data.KeyValueName;
+                modelData.Text = data.Text;
+                modelData.Value = data.Value;
+                modelData.Sort = data.Sort;
+                modelData.EnterPriseId = data.EnterPriseId;
+
+                keyValuesDAO.Insert(modelData);
                 keyValuesDAO.SaveChange();
             }
             catch (Exception ex)

@@ -40,7 +40,7 @@ namespace DAL
                 parameterList.Add("@text", $"%{query.Text}%");
             }
 
-            stringBuilder.AppendLine(" order by K.Sort, K.Id desc ");
+            stringBuilder.AppendLine(" order by K.Id, K.Sort desc ");
 
             var res = _db.Database.Connection.Query<KeyValues>(stringBuilder.ToString(), parameterList).ToList();
 
