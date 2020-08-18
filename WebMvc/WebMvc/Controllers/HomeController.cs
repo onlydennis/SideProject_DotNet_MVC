@@ -87,5 +87,23 @@ namespace WebMvc.Controllers
                 return Content(result, "application/json");
             }
         }
+
+        public ActionResult Delete(KeyValuesViewModel data)
+        {
+            HomeService service = new HomeService();
+
+            bool res = service.Delete(data, out string errMsg);
+
+            if (res)
+            {
+                var result = JsonConvert.SerializeObject(new { IsOk = true, Message = "刪除成功" }, new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
+                return Content(result, "application/json");
+            }
+            else
+            {
+                var result = JsonConvert.SerializeObject(new { IsOk = false, Message = "刪除失敗" + errMsg }, new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
+                return Content(result, "application/json");
+            }
+        }
     }
 }

@@ -134,4 +134,31 @@ function HomeController($scope, $http, $filter) {
         $scope.ShowEdit();
         $scope.IsShowDelBtn = false;
     }
+
+    $scope.Delete = function () {
+        alertify.confirm("Please Confirm?", function (e) {
+            if (e) {
+                if ($scope.data == null)
+                    return false;
+
+                var url = '/Home/Delete';
+
+                $http.post(url,
+                    {
+                        data: $scope.data
+                    }).then(function (result) {
+                        if (result.data.IsOk) {
+                            $scope.QueryAll();
+                            $scope.ShowQuery();
+                            alertify.success(result.data.Message);
+                        }
+                        else if (result.data.IsOk == false)
+                            alertify.alert(result.data.Message);
+                        else {
+                            alertify.error(result.data.Message);
+                        }
+                    });
+            }
+        });
+    }
 }

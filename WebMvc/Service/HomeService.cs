@@ -95,5 +95,27 @@ namespace Service
 
             return true;
         }
+
+        public bool Delete(KeyValuesViewModel data, out string errMsg)
+        {
+            KeyValuesDAO keyValuesDAO = new KeyValuesDAO();
+
+            errMsg = "";
+
+            try
+            {
+                var dbModel = keyValuesDAO.FindById(data.Id);
+
+                keyValuesDAO.Delete(dbModel);
+                keyValuesDAO.SaveChange();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+                return false;
+            }
+
+            return true;
+        }
     }
 }
