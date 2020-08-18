@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,17 @@ namespace WebMvc.Controllers
     {
         public ActionResult Index()
         {
+            KeyValuesDAO dao = new KeyValuesDAO();
+
+            try
+            {
+                var tmp = dao.Test();
+            }
+            catch (Exception ex)
+            {
+                string errMsg = ex.Message;
+            }
+
             return View();
         }
 
